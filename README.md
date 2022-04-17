@@ -1,8 +1,16 @@
 # EPMS - Service
 
-## production
+Executive Process Model Suggestion Service
 
-### build
+This Project is meant to prodive a service for suggesting changes to a executable BPMN process Model based on current research and best practices for building executable BPMN. 
+
+This Software is part of the bachelor thesis on 'How to model and optimize executional Process models'
+
+## status
+
+in developement
+
+## build
 
 ```sh
 mvn generate-sources
@@ -17,7 +25,7 @@ mvn package
 Camunda's community edition then you have to add `-Dcamunda-edition=ce`
 to every `mvn`-command.
 
-### run
+## run
 
 ```sh
 java -jar target/*.jar
