@@ -1,0 +1,55 @@
+epms:
+spring:
+   datasource:
+      url: jdbc:h2:file:./database/db;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+      driver-class-name: org.h2.Driver
+      username: admin
+      password: password
+   application:
+      name: epms-service
+      # see de.mhb.commons.spa.SpaNoHandlerFoundExceptionHandler
+      spa-default-file: classpath:/static/index.html
+   mvc:
+      # see de.mhb.commons.spa.SpaNoHandlerFoundExceptionHandler
+      throw-exception-if-no-handler-found: true
+   resources:
+      # see de.mhb.commons.spa.SpaNoHandlerFoundExceptionHandler
+      add-mappings: false
+camunda:
+   bpm:
+      admin-user:
+         id: admin
+         password: admin
+         first-name: Admin
+         last-name: Istrator
+      default-number-of-retries: 1
+      job-execution:
+         core-pool-size: 2
+         max-pool-size: 2
+         wait-time-in-millis: 2500
+         max-wait: 20000
+      generic-properties:
+         properties:
+            historyCleanupBatchWindowStartTime: '20:00'
+            historyCleanupBatchWindowEndTime: 05:00
+            historyCleanupBatchSize: 100
+            initializeTelemetry: false
+      authorization:
+         enabled: false
+      database:
+         type: h2
+      metrics:
+         enabled: false
+         db-reporter-active: false
+      webapp:
+         index-redirect-enabled: false
+   xstream-serialization:
+      allowed-types:
+         - at.epms.**
+logging:
+   level:
+      # see de.mhb.commons.spa.SpaNoHandlerFoundExceptionHandler
+      org.springframework.web.servlet.PageNotFound: ERROR
+      org.springframework.web.socket.config.WebSocketMessageBrokerStats: ERROR
+      org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver: ERROR
+      org.springframework.web.servlet.NoHandlerFoundException: FATAL
