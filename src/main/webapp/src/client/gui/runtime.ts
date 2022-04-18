@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * gui
- * GUI API
+ * EPMS API
  *
  * The version of the OpenAPI document: 1.0
  * 
