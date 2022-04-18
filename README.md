@@ -2,7 +2,8 @@
 
 Executive Process Model Suggestion Service
 
-This Project is meant to prodive a service for suggesting changes to a executable BPMN process Model based on current research and best practices for building executable BPMN. 
+This Project is meant to provide a service for suggesting changes to an executable BPMN process Model based on current 
+research and best practices for building executable BPMN. 
 
 This Software is part of the bachelor thesis on ['How to Model and Optimize Executable Process Models'](https://github.com/dsunaric/thesis)
 
