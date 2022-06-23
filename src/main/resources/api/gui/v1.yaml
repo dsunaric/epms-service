@@ -3,15 +3,10 @@ info:
   description: EPMS API
   version: '1.0'
   title: gui
-servers:
-  - url: /api/v1.0
-
 
 paths:
   /suggestions:
     post:
-      tags:
-        - suggestions
       summary: get suggestions for the given executable bpmn
       operationId: postSuggestions
       requestBody:
@@ -25,8 +20,48 @@ paths:
                   format: binary
       responses:
         200:
-          description: ok
+          description: A List of Rules and their effected Elements
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppliedRules'
         404:
           description: error
 
+components:
+  schemas:
+    AppliedRules:
+      type: array
+      items:
+        $ref: '#/components/schemas/AppliedRule'
+
+    AppliedRule:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        details:
+          type: string
+        effectedElements:
+          $ref: '#/components/schemas/EffectedElements'
+
+    EffectedElements:
+      type: array
+      items:
+        $ref: '#/components/schemas/EffectedElement'
+
+    EffectedElement:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+            - Task
+            - Event
 

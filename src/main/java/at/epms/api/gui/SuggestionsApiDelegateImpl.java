@@ -1,5 +1,6 @@
 package at.epms.api.gui;
 
+import at.epms.api.gui.v1.AppliedRule;
 import at.epms.api.gui.v1.SuggestionsApi;
 import at.epms.api.gui.v1.SuggestionsApiDelegate;
 import at.epms.mapper.FileMapper;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 
 @Component
@@ -22,10 +24,10 @@ public class SuggestionsApiDelegateImpl implements SuggestionsApiDelegate {
     protected FileMapper fileMapper;
 
     @Override
-    public ResponseEntity<Void> postSuggestions(MultipartFile processModel){
+    public ResponseEntity<List<AppliedRule>> postSuggestions(MultipartFile processModel){
         try{
-            suggestionService.applyRules(fileMapper.multipartFileToBpmnModelInstance(processModel));
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(
+                suggestionService.applyRules(fileMapper.multipartFileToBpmnModelInstance(processModel)));
         }catch(Exception e){
             return ResponseEntity.internalServerError().build();
         }
