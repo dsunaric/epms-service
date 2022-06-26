@@ -1,246 +1,911 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.11.1" camunda:diagramRelationId="d627558f-b95a-4a9b-808e-3eca4a96cb1d">
-  <bpmn:collaboration id="Collaboration_12vct0t">
-    <bpmn:participant id="Participant_0b573qb" name="Missing Parts Process" processRef="Process_cd9923e4-1a30-4c5d-9cce-cfd113023ae0" />
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.11.1">
+  <bpmn:collaboration id="NewCustomerRegistrationServiceColloberation">
+    <bpmn:participant id="Participant_NewCustomerRegistration" processRef="NewCustomerRegistrationProcess" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_cd9923e4-1a30-4c5d-9cce-cfd113023ae0" isExecutable="true">
-    <bpmn:laneSet id="LaneSet_049xisw">
-      <bpmn:lane id="Lane_0vbeqx7" name="Customer">
-        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Event_0z0ux71</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_050wqsh</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Event_0fw1jxz</bpmn:flowNodeRef>
-      </bpmn:lane>
-      <bpmn:lane id="Lane_1mi0lvq" name="first-level support">
-        <bpmn:flowNodeRef>Activity_0ix2miv</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Event_17sidu9</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_0e36w6z</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_0y1zoh5</bpmn:flowNodeRef>
-      </bpmn:lane>
-      <bpmn:lane id="Lane_0jcaxi6" name="warehouse administration">
-        <bpmn:flowNodeRef>Gateway_1k7s2c0</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_074kier</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Event_1lmsftr</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_0mnla8i</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_0h8sjfa</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_0j0vgqw</bpmn:flowNodeRef>
-        <bpmn:childLaneSet id="LaneSet_15d85bq" />
-      </bpmn:lane>
-      <bpmn:lane id="Lane_14nqfni" name="logistics">
-        <bpmn:flowNodeRef>Activity_1hdyrd7</bpmn:flowNodeRef>
-      </bpmn:lane>
-    </bpmn:laneSet>
-    <bpmn:sequenceFlow id="Flow_0vqyznt" sourceRef="StartEvent_1" targetRef="Activity_050wqsh" />
-    <bpmn:sequenceFlow id="Flow_001webb" sourceRef="Activity_050wqsh" targetRef="Activity_0e36w6z" />
-    <bpmn:sequenceFlow id="Flow_0elgeox" sourceRef="Activity_0e36w6z" targetRef="Activity_0y1zoh5" />
-    <bpmn:sequenceFlow id="Flow_1f21drr" sourceRef="Activity_0y1zoh5" targetRef="Activity_0mnla8i" />
-    <bpmn:sequenceFlow id="Flow_1qwg7z7" sourceRef="Activity_0mnla8i" targetRef="Gateway_1k7s2c0" />
-    <bpmn:sequenceFlow id="Flow_10izrbr" name="yes" sourceRef="Gateway_1k7s2c0" targetRef="Activity_0h8sjfa" />
-    <bpmn:sequenceFlow id="Flow_0sjkmo1" name="no" sourceRef="Gateway_1k7s2c0" targetRef="Activity_074kier" />
-    <bpmn:sequenceFlow id="Flow_1jaenfh" sourceRef="Activity_0h8sjfa" targetRef="Activity_0j0vgqw" />
-    <bpmn:sequenceFlow id="Flow_0a62hon" sourceRef="Activity_0j0vgqw" targetRef="Activity_0ix2miv" />
-    <bpmn:sequenceFlow id="Flow_06ir7r7" sourceRef="Activity_074kier" targetRef="Activity_1hdyrd7" />
-    <bpmn:sequenceFlow id="Flow_05cz8rp" sourceRef="Activity_1hdyrd7" targetRef="Event_1lmsftr" />
-    <bpmn:sequenceFlow id="Flow_0cv46py" sourceRef="Event_1lmsftr" targetRef="Activity_0h8sjfa" />
-    <bpmn:sequenceFlow id="Flow_1uefvkf" sourceRef="Activity_0ix2miv" targetRef="Event_17sidu9" />
-    <bpmn:startEvent id="StartEvent_1" name="missing part in order">
-      <bpmn:outgoing>Flow_0vqyznt</bpmn:outgoing>
-    </bpmn:startEvent>
-    <bpmn:task id="Activity_1hdyrd7" name="order missing part">
-      <bpmn:incoming>Flow_06ir7r7</bpmn:incoming>
-      <bpmn:outgoing>Flow_05cz8rp</bpmn:outgoing>
-    </bpmn:task>
-    <bpmn:intermediateCatchEvent id="Event_1lmsftr" name="wait for product to enter warehouse">
-      <bpmn:incoming>Flow_05cz8rp</bpmn:incoming>
-      <bpmn:outgoing>Flow_0cv46py</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_010kj33" />
-    </bpmn:intermediateCatchEvent>
-    <bpmn:endEvent id="Event_17sidu9" name="missing part shipped to customer">
-      <bpmn:incoming>Flow_1uefvkf</bpmn:incoming>
+  <bpmn:message id="Message_1m5mnlq" name="OteloOrderingPUCRequest" />
+  <bpmn:error id="Error_0gr63bq" name="Error_Declined" />
+  <bpmn:message id="Message_0xqs6h8" name="OteloOrderingPUCResponse_Accepted" />
+  <bpmn:message id="Message_02840cc" name="OteloOrderingPUCResponse_Declined" />
+  <bpmn:message id="Message_0ozqy7w" name="SuMS.notifyWebIdentSuccess" />
+  <bpmn:error id="Error_0gmcci6" name="Error_WebIdentCancel" errorCode="Error_WebIdentCancel" />
+  <bpmn:message id="Message_1yhd25r" name="SuMS.notifyCancelledWebIdent" />
+  <bpmn:error id="Error_0wipx8k" name="Order Lifetime Exceeded" errorCode="java.lang.Exception" />
+  <bpmn:message id="Message_0bx5yvc" name="ActuallyNotSentMessage" />
+  <bpmn:error id="Error_0ypxun0" name="OrderingError" errorCode="java.lang.Exception" />
+  <bpmn:error id="Error_1uqlm0t" name="DocPickupError" errorCode="java.lang.Exception" />
+  <bpmn:error id="Error_1ezj5wk" name="InitiationError" errorCode="java.lang.Exception" />
+  <bpmn:message id="Message_0dvkn1u" name="getContractSummary" />
+  <bpmn:message id="Message_1ddsxpf" name="confirmEECCProcess" />
+  <bpmn:signal id="Signal_16k6aq5" name="afterMidnight" />
+  <bpmn:message id="Message_0pocpno" name="IdentResponseMessage" />
+  <bpmn:error id="Error_1bw4uvj" name="Ident Invalid" errorCode="java.lang.Exception" />
+  <bpmn:message id="Message_16o77vs" name="DoubleCheckSuccess" />
+  <bpmn:message id="Message_0ztaoa8" name="DoubleCheckFailed" />
+  <bpmn:message id="Message_16mmcot" name="cancelProcess" />
+  <bpmn:escalation id="Escalation_075oh1i" name="IdentCheckFailed" escalationCode="IDENT_CHECK_NOT_SUCESSFULL" />
+  <bpmn:escalation id="Escalation_0drstb3" name="Escalation_update_process_variables" escalationCode="UPDATE_PROCESS_VARIABLES" />
+  <bpmn:error id="Error_0t8ab2m" name="Error_Order_Lifetime_Exceeded" errorCode="ORDER_LIFETIME_EXCEEDED" />
+  <bpmn:process id="NewCustomerRegistrationProcess" name="A - New Customer Process" isExecutable="true" camunda:historyTimeToLive="P120D">
+    <bpmn:serviceTask id="IMEI_export" name="save IMEI for export" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:expression="${BpNewCustomerRegistrationService.saveImeiForExport(execution)}">
+      <bpmn:incoming>Flow_0vir04x</bpmn:incoming>
+      <bpmn:outgoing>Flow_0iakl5a</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:callActivity id="CallActivity_DocumentConfirmationSubprocess" name="Create Documents and Confirmation" calledElement="Process_EECCDocumentWorkflow">
+      <bpmn:extensionElements>
+        <camunda:in businessKey="#{execution.processBusinessKey}" />
+        <camunda:in variables="all" />
+        <camunda:out variables="all" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_NonDefaultDocument</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_04qipcq</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:endEvent id="EndEvent_Documents_Created" name="Documents Created">
+      <bpmn:incoming>SequenceFlow_1pomzox</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:task id="Activity_0ix2miv" name="notify customer">
-      <bpmn:incoming>Flow_0a62hon</bpmn:incoming>
-      <bpmn:outgoing>Flow_1uefvkf</bpmn:outgoing>
-    </bpmn:task>
-    <bpmn:task id="Activity_074kier" name="send order to logistics">
-      <bpmn:incoming>Flow_0sjkmo1</bpmn:incoming>
-      <bpmn:outgoing>Flow_06ir7r7</bpmn:outgoing>
-    </bpmn:task>
-    <bpmn:exclusiveGateway id="Gateway_1k7s2c0">
-      <bpmn:incoming>Flow_1qwg7z7</bpmn:incoming>
-      <bpmn:outgoing>Flow_10izrbr</bpmn:outgoing>
-      <bpmn:outgoing>Flow_0sjkmo1</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="Flow_1fqb91o" sourceRef="Event_0fw1jxz" targetRef="Event_0z0ux71" />
-    <bpmn:endEvent id="Event_0z0ux71">
-      <bpmn:incoming>Flow_1fqb91o</bpmn:incoming>
+    <bpmn:endEvent id="ErrorEndEvent_PendingContractSummaryLifetimeExceeded" name="Order Lifetime Exceeded">
+      <bpmn:incoming>SequenceFlow_001ykcn</bpmn:incoming>
+      <bpmn:errorEventDefinition errorRef="Error_0vxm2xw" />
     </bpmn:endEvent>
-    <bpmn:receiveTask id="Activity_0mnla8i" name="evaluate if missing part is available">
-      <bpmn:incoming>Flow_1f21drr</bpmn:incoming>
-      <bpmn:outgoing>Flow_1qwg7z7</bpmn:outgoing>
+    <bpmn:endEvent id="ErrorEndEvent_IdentSubProcessNotSucessfull" name="ident check failed">
+      <bpmn:incoming>SequenceFlow_0qfpg3f</bpmn:incoming>
+      <bpmn:terminateEventDefinition />
+    </bpmn:endEvent>
+    <bpmn:endEvent id="EndEvent_CanceledProcessInstance" name="Canceled Process Instance">
+      <bpmn:incoming>SequenceFlow_008zkwo</bpmn:incoming>
+      <bpmn:terminateEventDefinition />
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="CancelRelatedWebIdent" name="Cancel Related Identification Process Instances" camunda:expression="${BpNewCustomerRegistrationService.cancelRelatedWebIdentProcessesIfDeferredIdent(execution)}">
+      <bpmn:incoming>Flow_0vm73rc</bpmn:incoming>
+      <bpmn:outgoing>Flow_0dd6utf</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="CheckSolvency" name="Check&#10;solvency&#10;(if required)" camunda:expression="${BpNewCustomerRegistrationService.checkSolvencyIfRequired(execution)}">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property name="eventName" value="SuMS.checkSolvency" />
+        </camunda:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0dd6utf</bpmn:incoming>
+      <bpmn:outgoing>Flow_00ryelm</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sendTask id="SendWelcomeEmailTask" name="send welcome email" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:expression="${BpEmailService.triggerEmail(execution, &#34;WELCOME&#34;)}">
+      <bpmn:extensionElements>
+        <camunda:failedJobRetryTimeCycle>PT15M,PT45M,PT2H,PT12H,PT24H</camunda:failedJobRetryTimeCycle>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_06udxft</bpmn:incoming>
+      <bpmn:outgoing>Flow_0rnqupn</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:parallelGateway id="ParallelGateway_1iutlma">
+      <bpmn:incoming>Flow_0rnqupn</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0c3ost9</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0vir04x</bpmn:outgoing>
+      <bpmn:outgoing>Flow_10d9biu</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:parallelGateway id="ExclusiveGateway_0bob79d">
+      <bpmn:incoming>SequenceFlow_1njs5nd</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_16h7pxi</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_0ek5xcl</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_0tuj7t8</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:serviceTask id="DecideIdAndCsProcess" name="Decide non default doc flow and idnetification Process" camunda:expression="${BpNewCustomerRegistrationService.selectDeferredWebIdentAndCSProcess(execution)}">
+      <bpmn:incoming>SequenceFlow_16h7pxi</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_00vte7s</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:callActivity id="CallActivity_DeferredIdAndCsProcess" name="Deferred Ident and CS confirmation" calledElement="${deferredWebIdentAndCSProcess}">
+      <bpmn:extensionElements>
+        <camunda:in businessKey="#{execution.processBusinessKey}" />
+        <camunda:in variables="all" />
+        <camunda:out variables="all" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_00vte7s</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_06udxft</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:endEvent id="EndEvent_UpdateProcessVariables">
+      <bpmn:incoming>SequenceFlow_0p2eilo</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="RegisterMember" name="Register&#10;customer" camunda:expression="${BpNewCustomerRegistrationService.registerMember(execution)}">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property name="eventName" value="${hasMNP ? &#39;SuMS.registerMNPMember&#39; : &#39;SuMS.registerNewMember&#39;}" />
+        </camunda:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1cy8sif</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1njs5nd</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="ReserveMsisdn" name="Reserve phone number" camunda:expression="${BpNewCustomerRegistrationService.reserveMsisdnForNonMnp(execution)}">
+      <bpmn:incoming>Flow_1rvtquu</bpmn:incoming>
+      <bpmn:outgoing>Flow_1cy8sif</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="ApplyPromotions" name="Apply promotions" camunda:expression="${BpNewCustomerRegistrationService.applyPromotions(execution)}">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property name="eventName" value="PE.requestCurrentlyAvailablePromotions" />
+          <camunda:property name="lockTimeout" value="31536000000" />
+        </camunda:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_00ryelm</bpmn:incoming>
+      <bpmn:outgoing>Flow_1rvtquu</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="ErrorEndEvent_PendingContractSummaryCancelled" name="Pending Contract Summary Canceled">
+      <bpmn:extensionElements>
+        <camunda:executionListener expression="${BpProcessInfoService.update(execution, &#34;CANCELLED&#34;)}" event="start" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0kg79ui</bpmn:incoming>
+      <bpmn:errorEventDefinition errorRef="Error_0vxm2xw" />
+    </bpmn:endEvent>
+    <bpmn:endEvent id="ErrorEndEvent_OrderLifetimeExceeded" name="Order Lifetime exceeded">
+      <bpmn:extensionElements>
+        <camunda:executionListener expression="${BpProcessInfoService.update(execution, &#34;TIMED_OUT&#34;)}" event="start" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0o2nu5o</bpmn:incoming>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_0xwqaf1" errorRef="Error_0vxm2xw" />
+    </bpmn:endEvent>
+    <bpmn:endEvent id="ErrorEndEvent_PendingContractSummaryCancelled_DefaultDocFlow" name="Pending Process cancelled">
+      <bpmn:extensionElements>
+        <camunda:executionListener expression="${BpProcessInfoService.update(execution, &#34;CANCELLED&#34;)}" event="start" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_04kdqp9</bpmn:incoming>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_1pfd64e" errorRef="Error_0vxm2xw" />
+    </bpmn:endEvent>
+    <bpmn:receiveTask id="Task_AwaitConfirmation_DefaultDocWorkflow" name="Await confirmation" messageRef="Message_1ddsxpf">
+      <bpmn:incoming>Flow_0pzlaka</bpmn:incoming>
+      <bpmn:outgoing>Flow_0khm6cx</bpmn:outgoing>
     </bpmn:receiveTask>
-    <bpmn:serviceTask id="Activity_0h8sjfa" name="ship product to customer">
-      <bpmn:incoming>Flow_10izrbr</bpmn:incoming>
-      <bpmn:incoming>Flow_0cv46py</bpmn:incoming>
-      <bpmn:outgoing>Flow_1jaenfh</bpmn:outgoing>
+    <bpmn:serviceTask id="DefaultDocWorkflowPreAwaitConfirmation" name="create contract summary" camunda:expression="${BpShortenedEeccDocumentService.runDefaultDocumentWorkflowPreAwaitConfirmation(execution)}">
+      <bpmn:incoming>Flow_DefaultDocument</bpmn:incoming>
+      <bpmn:outgoing>Flow_0pzlaka</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Activity_0j0vgqw" name="notify first-level support about shipping">
-      <bpmn:incoming>Flow_1jaenfh</bpmn:incoming>
-      <bpmn:outgoing>Flow_0a62hon</bpmn:outgoing>
+    <bpmn:serviceTask id="ServiceTask_DefaultDocWorkflowPostAwaitConfirmation" name="validate address, validate payment and create contract" camunda:expression="${BpShortenedEeccDocumentService.runDefaultDocumentWorkflowPostAwaitConfirmation(execution)}">
+      <bpmn:incoming>Flow_0khm6cx</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ey3595</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:manualTask id="Activity_050wqsh" name="send e-mail to furniture store">
-      <bpmn:incoming>Flow_0vqyznt</bpmn:incoming>
-      <bpmn:outgoing>Flow_001webb</bpmn:outgoing>
-    </bpmn:manualTask>
-    <bpmn:boundaryEvent id="Event_0fw1jxz" attachedToRef="Activity_050wqsh">
-      <bpmn:outgoing>Flow_1fqb91o</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_02dm70h" />
+    <bpmn:exclusiveGateway id="Gateway_DocumentWorkflow" default="Flow_NonDefaultDocument">
+      <bpmn:incoming>SequenceFlow_1v5mdka</bpmn:incoming>
+      <bpmn:outgoing>Flow_NonDefaultDocument</bpmn:outgoing>
+      <bpmn:outgoing>Flow_DefaultDocument</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="Gateway_1e2cxrm">
+      <bpmn:incoming>SequenceFlow_04qipcq</bpmn:incoming>
+      <bpmn:incoming>Flow_0ey3595</bpmn:incoming>
+      <bpmn:outgoing>Flow_0vm73rc</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:startEvent id="StartEvent_initateActivation" name="Order received">
+      <bpmn:outgoing>SequenceFlow_1wr8mtn</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="ValidateOrderAndPrepareData" name="validate and  prepare data" camunda:expression="${BpShortenedNewCustomerRegistrationService.validateOrderDecideDocuments(execution)}">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property name="eventName" value="PE.requestCurrentlyAvailablePromotions" />
+          <camunda:property name="lockTimeout" value="31536000000" />
+        </camunda:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1wr8mtn</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1v5mdka</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="save_member_for_riskident" name="save new member in backend service" camunda:expression="${BpNewCustomerRegistrationService.saveNewMemberInRiskIdentService(execution)}">
+      <bpmn:incoming>SequenceFlow_0tuj7t8</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_05sn8qg</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="SetConsents" name="Set customer &#10;consents" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:expression="${BpNewCustomerRegistrationService.updateAdConsent(execution)}">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property name="eventName" value="SuMS.updateAdConsent" />
+        </camunda:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0ek5xcl</bpmn:incoming>
+      <bpmn:outgoing>Flow_12tqu86</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:inclusiveGateway id="ParallelGateway_0clqqzt">
+      <bpmn:incoming>Flow_12tqu86</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_05sn8qg</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_04ac7xi</bpmn:incoming>
+      <bpmn:incoming>Flow_0iakl5a</bpmn:incoming>
+      <bpmn:incoming>Flow_1kngr5a</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0g8pwor</bpmn:incoming>
+      <bpmn:incoming>Flow_0v8nb2m</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0equ7d5</bpmn:outgoing>
+    </bpmn:inclusiveGateway>
+    <bpmn:endEvent id="EndEvent_OrderConfirmed" name="Order &#10;confirmed">
+      <bpmn:incoming>SequenceFlow_0equ7d5</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="RetrieveMsisdnIfMissing" name="check customer number" camunda:expression="${BpNewCustomerRegistrationService.retrieveMsisdnIfMissing(execution)}">
+      <bpmn:incoming>SequenceFlow_0pa3oq9</bpmn:incoming>
+      <bpmn:outgoing>Flow_1h4q2y1</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="BookAutoTopups" name="Book further multi options" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:expression="${BpNewCustomerRegistrationService.bookAutoTopupsIfRequested(execution)}">
+      <bpmn:extensionElements>
+        <camunda:failedJobRetryTimeCycle>PT5M,PT15M,PT30M,PT2H,PT12H</camunda:failedJobRetryTimeCycle>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_045t2vp</bpmn:incoming>
+      <bpmn:outgoing>Flow_0arwwr0</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:callActivity id="CallActivity_ArchiveContractDocuments" name="archive contract documents" camunda:asyncBefore="true" camunda:asyncAfter="true" calledElement="ArchiveContractDocumentsProcess">
+      <bpmn:extensionElements>
+        <camunda:in businessKey="#{execution.processBusinessKey}" />
+        <camunda:in source="brandName" target="brandName" />
+        <camunda:in source="market" target="market" />
+        <camunda:in source="msisdn" target="msisdn" />
+        <camunda:in source="customerId" target="customerId" />
+        <camunda:in source="docmanagerToken" target="docmanagerToken" />
+        <camunda:in source="docmanagerContractSummaryToken" target="docmanagerContractSummaryToken" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1rcz3zo</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_04ac7xi</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:serviceTask id="indexContractDocuments" name="index for contract documents" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:expression="${BpDocumentInfoService.createDocumentInfoForDocuments(execution)}">
+      <bpmn:incoming>Flow_04tltuh</bpmn:incoming>
+      <bpmn:outgoing>Flow_1rcz3zo</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="ServiceTask_0p0tajd" name="Start Belated Porting" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:expression="${BpNewCustomerRegistrationService.startBelatedPortingInSuMS(execution)}">
+      <bpmn:incoming>SequenceFlow_0f1sxif</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_100l9l8</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="ServiceTask_0e2r82f" name="Create Porting-Info History Entry" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:expression="${BpNewCustomerRegistrationService.addSuMSHistoryEntry(execution)}">
+      <bpmn:incoming>SequenceFlow_100l9l8</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_19pyina</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="ServiceTask_1oozd0s" name="Create Porting-Consent History Entry" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:expression="${BpNewCustomerRegistrationService.writePortingConsentHistoryEntry(execution)}">
+      <bpmn:incoming>SequenceFlow_19pyina</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0g8pwor</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:inclusiveGateway id="ParallelGateway_0crudor">
+      <bpmn:incoming>Flow_1h4q2y1</bpmn:incoming>
+      <bpmn:outgoing>Flow_04tltuh</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_0f1sxif</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_1pzsrpa</bpmn:outgoing>
+    </bpmn:inclusiveGateway>
+    <bpmn:callActivity id="CallActivity_AwaitSimActivation" name="Await customer activation in backend service" calledElement="AwaitSimActivation">
+      <bpmn:extensionElements>
+        <camunda:in businessKey="#{execution.processBusinessKey}" />
+        <camunda:in variables="all" />
+        <camunda:out variables="all" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0c3ost9</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0pa3oq9</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:endEvent id="Event_1g7y40f">
+      <bpmn:incoming>Flow_09h6k0y</bpmn:incoming>
+      <bpmn:terminateEventDefinition id="TerminateEventDefinition_1b9xvwh" />
+    </bpmn:endEvent>
+    <bpmn:intermediateThrowEvent id="IntermediateThrowEvent_0qb92hs">
+      <bpmn:incoming>SequenceFlow_1ha3mae</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0qfpg3f</bpmn:outgoing>
+      <bpmn:compensateEventDefinition activityRef="ApplyPromotions" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:intermediateThrowEvent id="IntermediateThrowEvent_1wdbfmd">
+      <bpmn:incoming>SequenceFlow_1o1hvj3</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_008zkwo</bpmn:outgoing>
+      <bpmn:compensateEventDefinition activityRef="ApplyPromotions" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:serviceTask id="Task_0chmr8b" name="cancel Promotion" isForCompensation="true" camunda:expression="${BpNewCustomerRegistrationService.cancelPromotions(execution)}" />
+    <bpmn:serviceTask id="BookSingleTopups" name="Book further single options" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:expression="${BpNewCustomerRegistrationService.bookSingleTopupIfRequested(execution)}">
+      <bpmn:extensionElements>
+        <camunda:failedJobRetryTimeCycle>PT5M,PT15M,PT30M,PT2H,PT12H</camunda:failedJobRetryTimeCycle>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1pzsrpa</bpmn:incoming>
+      <bpmn:outgoing>Flow_045t2vp</bpmn:outgoing>
+      <bpmn:outgoing>Flow_19dsrv0</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="BookDeferredOptions" name="Book further deferred options" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:expression="${BpNewCustomerRegistrationService.bookDeferredOptions(execution)}">
+      <bpmn:extensionElements>
+        <camunda:failedJobRetryTimeCycle>PT5M,PT15M,PT30M,PT2H,PT12H</camunda:failedJobRetryTimeCycle>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0arwwr0</bpmn:incoming>
+      <bpmn:incoming>Flow_19dsrv0</bpmn:incoming>
+      <bpmn:outgoing>Flow_0v8nb2m</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:subProcess id="SubProcess_0lnms3q" name="promotion appliing" triggeredByEvent="true">
+      <bpmn:endEvent id="EndEvent_0149dfg">
+        <bpmn:extensionElements>
+          <camunda:executionListener expression="${BpNewCustomerRegistrationService.passException(execution)}" event="start" />
+        </bpmn:extensionElements>
+        <bpmn:incoming>SequenceFlow_0n6exz3</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="SequenceFlow_08ovz6d" sourceRef="IntermediateThrowEvent_1fpdp8v" targetRef="IntermediateThrowEvent_01y7etd" />
+      <bpmn:startEvent id="IntermediateThrowEvent_1fpdp8v">
+        <bpmn:outgoing>SequenceFlow_08ovz6d</bpmn:outgoing>
+        <bpmn:errorEventDefinition errorRef="Error_145wbdr" />
+      </bpmn:startEvent>
+      <bpmn:intermediateThrowEvent id="IntermediateThrowEvent_01y7etd">
+        <bpmn:incoming>SequenceFlow_08ovz6d</bpmn:incoming>
+        <bpmn:outgoing>SequenceFlow_0n6exz3</bpmn:outgoing>
+        <bpmn:compensateEventDefinition activityRef="ApplyPromotions" />
+      </bpmn:intermediateThrowEvent>
+      <bpmn:sequenceFlow id="SequenceFlow_0n6exz3" sourceRef="IntermediateThrowEvent_01y7etd" targetRef="EndEvent_0149dfg" />
+    </bpmn:subProcess>
+    <bpmn:serviceTask id="data_to_warehouse" name="store data into datastore" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:expression="${BpNewCustomerRegistrationService.storeDataIntoDataWarehouse(execution)}">
+      <bpmn:incoming>Flow_10d9biu</bpmn:incoming>
+      <bpmn:outgoing>Flow_1kngr5a</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:boundaryEvent id="BoundaryEvent_12oe82t" attachedToRef="ApplyPromotions">
+      <bpmn:compensateEventDefinition />
     </bpmn:boundaryEvent>
-    <bpmn:userTask id="Activity_0e36w6z" name="recieve client&#10;e-mail" camunda:candidateUsers="as, abc" camunda:candidateGroups="asda">
-      <bpmn:incoming>Flow_001webb</bpmn:incoming>
-      <bpmn:outgoing>Flow_0elgeox</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:userTask id="Activity_0y1zoh5" name="save request &#38; contact warehouse" camunda:candidateUsers="as, abc" camunda:candidateGroups="asda">
-      <bpmn:incoming>Flow_0elgeox</bpmn:incoming>
-      <bpmn:outgoing>Flow_1f21drr</bpmn:outgoing>
-    </bpmn:userTask>
+    <bpmn:boundaryEvent id="Event_0yp2af5" attachedToRef="CallActivity_AwaitSimActivation">
+      <bpmn:outgoing>Flow_09h6k0y</bpmn:outgoing>
+      <bpmn:escalationEventDefinition id="EscalationEventDefinition_1k1d9rc" escalationRef="Escalation_0zop4uc" />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="Event_confirmationLifetimeExceeded" attachedToRef="Task_AwaitConfirmation_DefaultDocWorkflow">
+      <bpmn:outgoing>Flow_0o2nu5o</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_0ra9as9">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">${BpEECCDocumentsService.getPendingOrderDueDate()}</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="BoundaryEvent_cleanUpPendingCS_DefaultDocFlow" attachedToRef="Task_AwaitConfirmation_DefaultDocWorkflow">
+      <bpmn:outgoing>Flow_04kdqp9</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0m52q6e" messageRef="Message_0u505yf" />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="BoundaryEvent_IdentSubProcessNotSucessfull" attachedToRef="CallActivity_DeferredIdAndCsProcess">
+      <bpmn:outgoing>SequenceFlow_1ha3mae</bpmn:outgoing>
+      <bpmn:escalationEventDefinition escalationRef="Escalation_075oh1i" />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="BoundaryEvent_UpdateProcessVariables" name="Update Process Variables" cancelActivity="false" attachedToRef="CallActivity_DeferredIdAndCsProcess">
+      <bpmn:outgoing>SequenceFlow_0p2eilo</bpmn:outgoing>
+      <bpmn:escalationEventDefinition escalationRef="Escalation_0drstb3" />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="BoundaryEvent_CanceledProcessInstance" attachedToRef="CallActivity_DeferredIdAndCsProcess">
+      <bpmn:outgoing>SequenceFlow_1o1hvj3</bpmn:outgoing>
+      <bpmn:escalationEventDefinition escalationRef="Escalation_0zop4uc" />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="BoundaryEvent_cleanUpPendingCS" attachedToRef="CallActivity_DocumentConfirmationSubprocess">
+      <bpmn:outgoing>SequenceFlow_0kg79ui</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0givopf" messageRef="Message_0u505yf" />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="BoundaryEvent_Documents_Created" cancelActivity="false" attachedToRef="CallActivity_DocumentConfirmationSubprocess">
+      <bpmn:outgoing>SequenceFlow_1pomzox</bpmn:outgoing>
+      <bpmn:escalationEventDefinition escalationRef="Escalation_0drstb3" />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="BoundaryEvent_Order_Lifetime" attachedToRef="CallActivity_DocumentConfirmationSubprocess">
+      <bpmn:outgoing>SequenceFlow_001ykcn</bpmn:outgoing>
+      <bpmn:errorEventDefinition errorRef="Error_0t8ab2m" />
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_1rvtquu" sourceRef="ApplyPromotions" targetRef="ReserveMsisdn" />
+    <bpmn:sequenceFlow id="SequenceFlow_0qfpg3f" sourceRef="IntermediateThrowEvent_0qb92hs" targetRef="ErrorEndEvent_IdentSubProcessNotSucessfull" />
+    <bpmn:sequenceFlow id="SequenceFlow_008zkwo" sourceRef="IntermediateThrowEvent_1wdbfmd" targetRef="EndEvent_CanceledProcessInstance" />
+    <bpmn:sequenceFlow id="Flow_09h6k0y" sourceRef="Event_0yp2af5" targetRef="Event_1g7y40f" />
+    <bpmn:sequenceFlow id="SequenceFlow_1pzsrpa" sourceRef="ParallelGateway_0crudor" targetRef="BookSingleTopups">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="javascript">execution.getVariable('simType') == 'E_SIM' &amp;&amp; execution.getVariable('processType') == 'ACTIVATION';</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_19pyina" sourceRef="ServiceTask_0e2r82f" targetRef="ServiceTask_1oozd0s" />
+    <bpmn:sequenceFlow id="SequenceFlow_100l9l8" sourceRef="ServiceTask_0p0tajd" targetRef="ServiceTask_0e2r82f" />
+    <bpmn:sequenceFlow id="Flow_00ryelm" sourceRef="CheckSolvency" targetRef="ApplyPromotions" />
+    <bpmn:sequenceFlow id="Flow_0dd6utf" sourceRef="CancelRelatedWebIdent" targetRef="CheckSolvency" />
+    <bpmn:sequenceFlow id="Flow_0rnqupn" sourceRef="SendWelcomeEmailTask" targetRef="ParallelGateway_1iutlma" />
+    <bpmn:sequenceFlow id="Flow_1h4q2y1" sourceRef="RetrieveMsisdnIfMissing" targetRef="ParallelGateway_0crudor" />
+    <bpmn:sequenceFlow id="Flow_0arwwr0" sourceRef="BookAutoTopups" targetRef="BookDeferredOptions" />
+    <bpmn:sequenceFlow id="Flow_045t2vp" sourceRef="BookSingleTopups" targetRef="BookAutoTopups" />
+    <bpmn:sequenceFlow id="Flow_1cy8sif" sourceRef="ReserveMsisdn" targetRef="RegisterMember" />
+    <bpmn:sequenceFlow id="Flow_04kdqp9" sourceRef="BoundaryEvent_cleanUpPendingCS_DefaultDocFlow" targetRef="ErrorEndEvent_PendingContractSummaryCancelled_DefaultDocFlow" />
+    <bpmn:sequenceFlow id="SequenceFlow_0kg79ui" sourceRef="BoundaryEvent_cleanUpPendingCS" targetRef="ErrorEndEvent_PendingContractSummaryCancelled" />
+    <bpmn:sequenceFlow id="Flow_0o2nu5o" sourceRef="Event_confirmationLifetimeExceeded" targetRef="ErrorEndEvent_OrderLifetimeExceeded" />
+    <bpmn:sequenceFlow id="Flow_0ey3595" sourceRef="ServiceTask_DefaultDocWorkflowPostAwaitConfirmation" targetRef="Gateway_1e2cxrm" />
+    <bpmn:sequenceFlow id="Flow_0khm6cx" sourceRef="Task_AwaitConfirmation_DefaultDocWorkflow" targetRef="ServiceTask_DefaultDocWorkflowPostAwaitConfirmation" />
+    <bpmn:sequenceFlow id="Flow_0pzlaka" sourceRef="DefaultDocWorkflowPreAwaitConfirmation" targetRef="Task_AwaitConfirmation_DefaultDocWorkflow" />
+    <bpmn:sequenceFlow id="Flow_DefaultDocument" name="Normal case Document Flow" sourceRef="Gateway_DocumentWorkflow" targetRef="DefaultDocWorkflowPreAwaitConfirmation">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${documentConfirmationProcess == 'Process_OnlineDocumentConfirmation' and contractSummaryProcess == 'Process_DefaultContractSummaryProcess'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0vm73rc" sourceRef="Gateway_1e2cxrm" targetRef="CancelRelatedWebIdent" />
+    <bpmn:sequenceFlow id="Flow_NonDefaultDocument" name="non default Document Flow" sourceRef="Gateway_DocumentWorkflow" targetRef="CallActivity_DocumentConfirmationSubprocess" />
+    <bpmn:sequenceFlow id="SequenceFlow_0equ7d5" sourceRef="ParallelGateway_0clqqzt" targetRef="EndEvent_OrderConfirmed" />
+    <bpmn:sequenceFlow id="SequenceFlow_0g8pwor" sourceRef="ServiceTask_1oozd0s" targetRef="ParallelGateway_0clqqzt" />
+    <bpmn:sequenceFlow id="SequenceFlow_0f1sxif" name="Belated MNP requested?" sourceRef="ParallelGateway_0crudor" targetRef="ServiceTask_0p0tajd">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${belatedMNP}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1kngr5a" sourceRef="data_to_warehouse" targetRef="ParallelGateway_0clqqzt" />
+    <bpmn:sequenceFlow id="Flow_0iakl5a" sourceRef="IMEI_export" targetRef="ParallelGateway_0clqqzt" />
+    <bpmn:sequenceFlow id="SequenceFlow_0pa3oq9" sourceRef="CallActivity_AwaitSimActivation" targetRef="RetrieveMsisdnIfMissing" />
+    <bpmn:sequenceFlow id="SequenceFlow_04ac7xi" sourceRef="CallActivity_ArchiveContractDocuments" targetRef="ParallelGateway_0clqqzt" />
+    <bpmn:sequenceFlow id="Flow_1rcz3zo" sourceRef="indexContractDocuments" targetRef="CallActivity_ArchiveContractDocuments" />
+    <bpmn:sequenceFlow id="Flow_04tltuh" sourceRef="ParallelGateway_0crudor" targetRef="indexContractDocuments">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${true}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_10d9biu" sourceRef="ParallelGateway_1iutlma" targetRef="data_to_warehouse" />
+    <bpmn:sequenceFlow id="Flow_0vir04x" sourceRef="ParallelGateway_1iutlma" targetRef="IMEI_export" />
+    <bpmn:sequenceFlow id="SequenceFlow_0c3ost9" sourceRef="ParallelGateway_1iutlma" targetRef="CallActivity_AwaitSimActivation" />
+    <bpmn:sequenceFlow id="SequenceFlow_16h7pxi" sourceRef="ExclusiveGateway_0bob79d" targetRef="DecideIdAndCsProcess" />
+    <bpmn:sequenceFlow id="SequenceFlow_06udxft" sourceRef="CallActivity_DeferredIdAndCsProcess" targetRef="SendWelcomeEmailTask" />
+    <bpmn:sequenceFlow id="SequenceFlow_00vte7s" sourceRef="DecideIdAndCsProcess" targetRef="CallActivity_DeferredIdAndCsProcess" />
+    <bpmn:sequenceFlow id="SequenceFlow_0p2eilo" sourceRef="BoundaryEvent_UpdateProcessVariables" targetRef="EndEvent_UpdateProcessVariables" />
+    <bpmn:sequenceFlow id="SequenceFlow_05sn8qg" sourceRef="save_member_for_riskident" targetRef="ParallelGateway_0clqqzt" />
+    <bpmn:sequenceFlow id="SequenceFlow_0tuj7t8" sourceRef="ExclusiveGateway_0bob79d" targetRef="save_member_for_riskident" />
+    <bpmn:sequenceFlow id="SequenceFlow_1njs5nd" sourceRef="RegisterMember" targetRef="ExclusiveGateway_0bob79d" />
+    <bpmn:sequenceFlow id="SequenceFlow_1wr8mtn" sourceRef="StartEvent_initateActivation" targetRef="ValidateOrderAndPrepareData" />
+    <bpmn:sequenceFlow id="SequenceFlow_04qipcq" sourceRef="CallActivity_DocumentConfirmationSubprocess" targetRef="Gateway_1e2cxrm" />
+    <bpmn:sequenceFlow id="SequenceFlow_1v5mdka" sourceRef="ValidateOrderAndPrepareData" targetRef="Gateway_DocumentWorkflow" />
+    <bpmn:sequenceFlow id="SequenceFlow_1ha3mae" sourceRef="BoundaryEvent_IdentSubProcessNotSucessfull" targetRef="IntermediateThrowEvent_0qb92hs" />
+    <bpmn:sequenceFlow id="SequenceFlow_1o1hvj3" sourceRef="BoundaryEvent_CanceledProcessInstance" targetRef="IntermediateThrowEvent_1wdbfmd" />
+    <bpmn:sequenceFlow id="Flow_12tqu86" sourceRef="SetConsents" targetRef="ParallelGateway_0clqqzt" />
+    <bpmn:sequenceFlow id="SequenceFlow_0ek5xcl" sourceRef="ExclusiveGateway_0bob79d" targetRef="SetConsents" />
+    <bpmn:sequenceFlow id="SequenceFlow_001ykcn" sourceRef="BoundaryEvent_Order_Lifetime" targetRef="ErrorEndEvent_PendingContractSummaryLifetimeExceeded" />
+    <bpmn:sequenceFlow id="SequenceFlow_1pomzox" sourceRef="BoundaryEvent_Documents_Created" targetRef="EndEvent_Documents_Created" />
+    <bpmn:sequenceFlow id="Flow_19dsrv0" sourceRef="BookSingleTopups" targetRef="BookDeferredOptions" />
+    <bpmn:sequenceFlow id="Flow_0v8nb2m" sourceRef="BookDeferredOptions" targetRef="ParallelGateway_0clqqzt" />
+    <bpmn:association id="Association_02dddhv" associationDirection="One" sourceRef="BoundaryEvent_12oe82t" targetRef="Task_0chmr8b" />
   </bpmn:process>
+  <bpmn:message id="Message_0u505yf" name="cleanUpPendingCS" />
+  <bpmn:escalation id="Escalation_06taca2" name="IdentCheckTimedOut" escalationCode="IDENT_CHECK_TIMED_OUT" />
+  <bpmn:error id="Error_19d0qa2" name="Error_deferredCSTimeout" errorCode="DEFERRED_CS_TIMEOUT" />
+  <bpmn:escalation id="Escalation_1xs4715" name="Escalation_DocumentsConfirmed" escalationCode="DOCUMENTS_CONFIRMED" />
+  <bpmn:error id="Error_0vxm2xw" name="Cancel" errorCode="CANCEL" />
+  <bpmn:escalation id="Escalation_0zop4uc" name="CancelProcessInstance" escalationCode="CANCELED_PROCESS_INSTANCE" />
+  <bpmn:error id="Error_17riapm" name="Error_eSimChangeFailed" errorCode="NO_SIM_CARD_REPLACEMENT_FOUND" />
+  <bpmn:error id="Error_145wbdr" name="Error_FailedConfirm" errorCode="Error_FailedConfirm" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_12vct0t">
-      <bpmndi:BPMNShape id="Participant_0b573qb_di" bpmnElement="Participant_0b573qb" isHorizontal="true">
-        <dc:Bounds x="132" y="100" width="1088" height="600" />
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="NewCustomerRegistrationServiceColloberation">
+      <bpmndi:BPMNShape id="Participant_10yb081_di" bpmnElement="Participant_NewCustomerRegistration" isHorizontal="true">
+        <dc:Bounds x="162" y="84" width="4143" height="830" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_14nqfni_di" bpmnElement="Lane_14nqfni" isHorizontal="true">
-        <dc:Bounds x="162" y="580" width="1058" height="120" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_0jcaxi6_di" bpmnElement="Lane_0jcaxi6" isHorizontal="true">
-        <dc:Bounds x="162" y="370" width="1058" height="210" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_1mi0lvq_di" bpmnElement="Lane_1mi0lvq" isHorizontal="true">
-        <dc:Bounds x="162" y="230" width="1058" height="140" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_0vbeqx7_di" bpmnElement="Lane_0vbeqx7" isHorizontal="true">
-        <dc:Bounds x="162" y="100" width="1058" height="130" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_1fqb91o_di" bpmnElement="Flow_1fqb91o">
-        <di:waypoint x="408" y="210" />
-        <di:waypoint x="520" y="210" />
-        <di:waypoint x="520" y="188" />
+      <bpmndi:BPMNEdge id="Flow_1rvtquu_di" bpmnElement="Flow_1rvtquu">
+        <di:waypoint x="1831" y="462" />
+        <di:waypoint x="1921" y="462" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1uefvkf_di" bpmnElement="Flow_1uefvkf">
-        <di:waypoint x="1090" y="300" />
-        <di:waypoint x="1142" y="300" />
+      <bpmndi:BPMNEdge id="SequenceFlow_0qfpg3f_di" bpmnElement="SequenceFlow_0qfpg3f">
+        <di:waypoint x="2599" y="358" />
+        <di:waypoint x="2578" y="358" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0cv46py_di" bpmnElement="Flow_0cv46py">
-        <di:waypoint x="808" y="500" />
-        <di:waypoint x="880" y="500" />
-        <di:waypoint x="880" y="470" />
+      <bpmndi:BPMNEdge id="SequenceFlow_008zkwo_di" bpmnElement="SequenceFlow_008zkwo">
+        <di:waypoint x="2752" y="358" />
+        <di:waypoint x="2778" y="358" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_05cz8rp_di" bpmnElement="Flow_05cz8rp">
-        <di:waypoint x="660" y="640" />
-        <di:waypoint x="701" y="640" />
-        <di:waypoint x="701" y="500" />
-        <di:waypoint x="772" y="500" />
+      <bpmndi:BPMNEdge id="Flow_09h6k0y_di" bpmnElement="Flow_09h6k0y">
+        <di:waypoint x="3121" y="520" />
+        <di:waypoint x="3121" y="543" />
+        <di:waypoint x="3183" y="543" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_06ir7r7_di" bpmnElement="Flow_06ir7r7">
-        <di:waypoint x="610" y="560" />
-        <di:waypoint x="610" y="600" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0a62hon_di" bpmnElement="Flow_0a62hon">
-        <di:waypoint x="1040" y="390" />
-        <di:waypoint x="1040" y="340" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1jaenfh_di" bpmnElement="Flow_1jaenfh">
-        <di:waypoint x="930" y="430" />
-        <di:waypoint x="990" y="430" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0sjkmo1_di" bpmnElement="Flow_0sjkmo1">
-        <di:waypoint x="610" y="455" />
-        <di:waypoint x="610" y="480" />
+      <bpmndi:BPMNEdge id="SequenceFlow_1pzsrpa_di" bpmnElement="SequenceFlow_1pzsrpa">
+        <di:waypoint x="3486" y="462" />
+        <di:waypoint x="3591" y="462" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="614" y="459" width="13" height="14" />
+          <dc:Bounds x="3509" y="819" width="88" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_10izrbr_di" bpmnElement="Flow_10izrbr">
-        <di:waypoint x="635" y="430" />
-        <di:waypoint x="830" y="430" />
+      <bpmndi:BPMNEdge id="SequenceFlow_19pyina_di" bpmnElement="SequenceFlow_19pyina">
+        <di:waypoint x="3831" y="570" />
+        <di:waypoint x="3871" y="570" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_100l9l8_di" bpmnElement="SequenceFlow_100l9l8">
+        <di:waypoint x="3691" y="570" />
+        <di:waypoint x="3731" y="570" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_00ryelm_di" bpmnElement="Flow_00ryelm">
+        <di:waypoint x="1621" y="462" />
+        <di:waypoint x="1731" y="462" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0dd6utf_di" bpmnElement="Flow_0dd6utf">
+        <di:waypoint x="1431" y="462" />
+        <di:waypoint x="1521" y="462" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0rnqupn_di" bpmnElement="Flow_0rnqupn">
+        <di:waypoint x="2891" y="462" />
+        <di:waypoint x="2965" y="462" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1h4q2y1_di" bpmnElement="Flow_1h4q2y1">
+        <di:waypoint x="3401" y="462" />
+        <di:waypoint x="3436" y="462" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0arwwr0_di" bpmnElement="Flow_0arwwr0">
+        <di:waypoint x="3831" y="462" />
+        <di:waypoint x="3871" y="462" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_045t2vp_di" bpmnElement="Flow_045t2vp">
+        <di:waypoint x="3691" y="462" />
+        <di:waypoint x="3731" y="462" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1cy8sif_di" bpmnElement="Flow_1cy8sif">
+        <di:waypoint x="2021" y="462" />
+        <di:waypoint x="2121" y="462" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_04kdqp9_di" bpmnElement="Flow_04kdqp9">
+        <di:waypoint x="891" y="404" />
+        <di:waypoint x="891" y="379" />
+        <di:waypoint x="925" y="379" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0kg79ui_di" bpmnElement="SequenceFlow_0kg79ui">
+        <di:waypoint x="881" y="709" />
+        <di:waypoint x="881" y="653" />
+        <di:waypoint x="925" y="653" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0o2nu5o_di" bpmnElement="Flow_0o2nu5o">
+        <di:waypoint x="891" y="520" />
+        <di:waypoint x="891" y="543" />
+        <di:waypoint x="925" y="543" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ey3595_di" bpmnElement="Flow_0ey3595">
+        <di:waypoint x="1121" y="462" />
+        <di:waypoint x="1186" y="462" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0khm6cx_di" bpmnElement="Flow_0khm6cx">
+        <di:waypoint x="911" y="462" />
+        <di:waypoint x="1021" y="462" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0pzlaka_di" bpmnElement="Flow_0pzlaka">
+        <di:waypoint x="731" y="462" />
+        <di:waypoint x="811" y="462" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12efads_di" bpmnElement="Flow_DefaultDocument">
+        <di:waypoint x="516" y="462" />
+        <di:waypoint x="631" y="462" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="731" y="412" width="18" height="14" />
+          <dc:Bounds x="516" y="425" width="77" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1qwg7z7_di" bpmnElement="Flow_1qwg7z7">
-        <di:waypoint x="530" y="430" />
-        <di:waypoint x="585" y="430" />
+      <bpmndi:BPMNEdge id="Flow_0vm73rc_di" bpmnElement="Flow_0vm73rc">
+        <di:waypoint x="1236" y="462" />
+        <di:waypoint x="1331" y="462" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1f21drr_di" bpmnElement="Flow_1f21drr">
-        <di:waypoint x="480" y="350" />
-        <di:waypoint x="480" y="390" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0elgeox_di" bpmnElement="Flow_0elgeox">
-        <di:waypoint x="390" y="310" />
-        <di:waypoint x="430" y="310" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_001webb_di" bpmnElement="Flow_001webb">
-        <di:waypoint x="340" y="210" />
-        <di:waypoint x="340" y="270" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0vqyznt_di" bpmnElement="Flow_0vqyznt">
-        <di:waypoint x="238" y="170" />
-        <di:waypoint x="290" y="170" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
-        <dc:Bounds x="202" y="152" width="36" height="36" />
+      <bpmndi:BPMNEdge id="Flow_00g7z1d_di" bpmnElement="Flow_NonDefaultDocument">
+        <di:waypoint x="491" y="487" />
+        <di:waypoint x="491" y="767" />
+        <di:waypoint x="811" y="767" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="194" y="195" width="72" height="27" />
+          <dc:Bounds x="501" y="550" width="77" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0equ7d5_di" bpmnElement="SequenceFlow_0equ7d5">
+        <di:waypoint x="4112" y="461" />
+        <di:waypoint x="4163" y="461" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0g8pwor_di" bpmnElement="SequenceFlow_0g8pwor">
+        <di:waypoint x="3971" y="570" />
+        <di:waypoint x="4088" y="570" />
+        <di:waypoint x="4088" y="487" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0f1sxif_di" bpmnElement="SequenceFlow_0f1sxif">
+        <di:waypoint x="3461" y="487" />
+        <di:waypoint x="3461" y="570" />
+        <di:waypoint x="3591" y="570" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3493" y="539" width="65" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1kngr5a_di" bpmnElement="Flow_1kngr5a">
+        <di:waypoint x="3493" y="860" />
+        <di:waypoint x="4088" y="860" />
+        <di:waypoint x="4088" y="487" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0iakl5a_di" bpmnElement="Flow_0iakl5a">
+        <di:waypoint x="3493" y="773" />
+        <di:waypoint x="4088" y="773" />
+        <di:waypoint x="4088" y="487" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0pa3oq9_di" bpmnElement="SequenceFlow_0pa3oq9">
+        <di:waypoint x="3196" y="462" />
+        <di:waypoint x="3301" y="462" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_04ac7xi_di" bpmnElement="SequenceFlow_04ac7xi">
+        <di:waypoint x="3831" y="358" />
+        <di:waypoint x="4088" y="358" />
+        <di:waypoint x="4088" y="437" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1rcz3zo_di" bpmnElement="Flow_1rcz3zo">
+        <di:waypoint x="3691" y="358" />
+        <di:waypoint x="3731" y="358" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_04tltuh_di" bpmnElement="Flow_04tltuh">
+        <di:waypoint x="3461" y="437" />
+        <di:waypoint x="3461" y="358" />
+        <di:waypoint x="3591" y="358" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10d9biu_di" bpmnElement="Flow_10d9biu">
+        <di:waypoint x="2990" y="487" />
+        <di:waypoint x="2990" y="860" />
+        <di:waypoint x="3393" y="860" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0vir04x_di" bpmnElement="Flow_0vir04x">
+        <di:waypoint x="2990" y="487" />
+        <di:waypoint x="2990" y="773" />
+        <di:waypoint x="3393" y="773" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0c3ost9_di" bpmnElement="SequenceFlow_0c3ost9">
+        <di:waypoint x="3015" y="462" />
+        <di:waypoint x="3096" y="462" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_16h7pxi_di" bpmnElement="SequenceFlow_16h7pxi">
+        <di:waypoint x="2394" y="462" />
+        <di:waypoint x="2445" y="462" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_06udxft_di" bpmnElement="SequenceFlow_06udxft">
+        <di:waypoint x="2724" y="462" />
+        <di:waypoint x="2791" y="462" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_00vte7s_di" bpmnElement="SequenceFlow_00vte7s">
+        <di:waypoint x="2545" y="462" />
+        <di:waypoint x="2624" y="462" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0p2eilo_di" bpmnElement="SequenceFlow_0p2eilo">
+        <di:waypoint x="2649" y="520" />
+        <di:waypoint x="2649" y="553" />
+        <di:waypoint x="2609" y="553" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_05sn8qg_di" bpmnElement="SequenceFlow_05sn8qg">
+        <di:waypoint x="2724" y="250" />
+        <di:waypoint x="4088" y="250" />
+        <di:waypoint x="4088" y="437" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0tuj7t8_di" bpmnElement="SequenceFlow_0tuj7t8">
+        <di:waypoint x="2369" y="437" />
+        <di:waypoint x="2369" y="250" />
+        <di:waypoint x="2624" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1njs5nd_di" bpmnElement="SequenceFlow_1njs5nd">
+        <di:waypoint x="2221" y="462" />
+        <di:waypoint x="2344" y="462" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1wr8mtn_di" bpmnElement="SequenceFlow_1wr8mtn">
+        <di:waypoint x="250" y="462" />
+        <di:waypoint x="306" y="462" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_04qipcq_di" bpmnElement="SequenceFlow_04qipcq">
+        <di:waypoint x="911" y="767" />
+        <di:waypoint x="1211" y="767" />
+        <di:waypoint x="1211" y="487" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1v5mdka_di" bpmnElement="SequenceFlow_1v5mdka">
+        <di:waypoint x="406" y="462" />
+        <di:waypoint x="466" y="462" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1ha3mae_di" bpmnElement="SequenceFlow_1ha3mae">
+        <di:waypoint x="2649" y="404" />
+        <di:waypoint x="2649" y="358" />
+        <di:waypoint x="2635" y="358" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1o1hvj3_di" bpmnElement="SequenceFlow_1o1hvj3">
+        <di:waypoint x="2698" y="404" />
+        <di:waypoint x="2698" y="358" />
+        <di:waypoint x="2716" y="358" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12tqu86_di" bpmnElement="Flow_12tqu86">
+        <di:waypoint x="2724" y="155" />
+        <di:waypoint x="4088" y="155" />
+        <di:waypoint x="4088" y="437" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0ek5xcl_di" bpmnElement="SequenceFlow_0ek5xcl">
+        <di:waypoint x="2369" y="437" />
+        <di:waypoint x="2369" y="155" />
+        <di:waypoint x="2624" y="155" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_001ykcn_di" bpmnElement="SequenceFlow_001ykcn">
+        <di:waypoint x="889" y="825" />
+        <di:waypoint x="889" y="847" />
+        <di:waypoint x="925" y="847" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1pomzox_di" bpmnElement="SequenceFlow_1pomzox">
+        <di:waypoint x="830" y="825" />
+        <di:waypoint x="830" y="847" />
+        <di:waypoint x="809" y="847" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_19dsrv0_di" bpmnElement="Flow_19dsrv0">
+        <di:waypoint x="3691" y="462" />
+        <di:waypoint x="3871" y="462" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0v8nb2m_di" bpmnElement="Flow_0v8nb2m">
+        <di:waypoint x="3971" y="462" />
+        <di:waypoint x="4063" y="462" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_1tq4b47_di" bpmnElement="IMEI_export">
+        <dc:Bounds x="3393" y="733" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CallActivity_0hvrs17_di" bpmnElement="CallActivity_DocumentConfirmationSubprocess">
+        <dc:Bounds x="811" y="727" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0mzs4ot_di" bpmnElement="EndEvent_Documents_Created">
+        <dc:Bounds x="773" y="829" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="764" y="872" width="57" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1hdyrd7_di" bpmnElement="Activity_1hdyrd7">
-        <dc:Bounds x="560" y="600" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0mj5y72_di" bpmnElement="Event_1lmsftr">
-        <dc:Bounds x="772" y="482" width="36" height="36" />
+      <bpmndi:BPMNShape id="EndEvent_1ehz1bt_di" bpmnElement="ErrorEndEvent_PendingContractSummaryLifetimeExceeded">
+        <dc:Bounds x="925" y="829" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="753" y="525" width="75" height="40" />
+          <dc:Bounds x="909" y="872" width="70" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_17sidu9_di" bpmnElement="Event_17sidu9">
-        <dc:Bounds x="1142" y="282" width="36" height="36" />
+      <bpmndi:BPMNShape id="EndEvent_1c5n7ql_di" bpmnElement="ErrorEndEvent_IdentSubProcessNotSucessfull">
+        <dc:Bounds x="2542" y="340" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1130" y="325" width="60" height="40" />
+          <dc:Bounds x="2517" y="323" width="85" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0ix2miv_di" bpmnElement="Activity_0ix2miv">
-        <dc:Bounds x="990" y="260" width="100" height="80" />
+      <bpmndi:BPMNShape id="EndEvent_1n6oiwd_di" bpmnElement="EndEvent_CanceledProcessInstance">
+        <dc:Bounds x="2778" y="340" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2752" y="310" width="90" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_074kier_di" bpmnElement="Activity_074kier">
-        <dc:Bounds x="560" y="480" width="100" height="80" />
+      <bpmndi:BPMNShape id="ServiceTask_1m73epc_di" bpmnElement="CancelRelatedWebIdent">
+        <dc:Bounds x="1331" y="422" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_1k7s2c0_di" bpmnElement="Gateway_1k7s2c0" isMarkerVisible="true">
-        <dc:Bounds x="585" y="405" width="50" height="50" />
+      <bpmndi:BPMNShape id="ServiceTask_1m9ih4g_di" bpmnElement="CheckSolvency">
+        <dc:Bounds x="1521" y="422" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0z0ux71_di" bpmnElement="Event_0z0ux71">
-        <dc:Bounds x="502" y="152" width="36" height="36" />
+      <bpmndi:BPMNShape id="SendTask_14err5x_di" bpmnElement="SendWelcomeEmailTask">
+        <dc:Bounds x="2791" y="422" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0yorz20_di" bpmnElement="Activity_0mnla8i">
-        <dc:Bounds x="430" y="390" width="100" height="80" />
+      <bpmndi:BPMNShape id="ParallelGateway_0neb98a_di" bpmnElement="ParallelGateway_1iutlma">
+        <dc:Bounds x="2965" y="437" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0ylwy7l_di" bpmnElement="Activity_0h8sjfa">
-        <dc:Bounds x="830" y="390" width="100" height="80" />
+      <bpmndi:BPMNShape id="ParallelGateway_1bl2a40_di" bpmnElement="ExclusiveGateway_0bob79d">
+        <dc:Bounds x="2344" y="437" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_02dp9cp_di" bpmnElement="Activity_0j0vgqw">
-        <dc:Bounds x="990" y="390" width="100" height="80" />
+      <bpmndi:BPMNShape id="ServiceTask_0ih0kh3_di" bpmnElement="DecideIdAndCsProcess">
+        <dc:Bounds x="2445" y="422" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0n9qhf6_di" bpmnElement="Activity_050wqsh">
-        <dc:Bounds x="290" y="130" width="100" height="80" />
+      <bpmndi:BPMNShape id="CallActivity_1hil1u9_di" bpmnElement="CallActivity_DeferredIdAndCsProcess">
+        <dc:Bounds x="2624" y="422" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0vxx35c_di" bpmnElement="Activity_0e36w6z">
-        <dc:Bounds x="290" y="270" width="100" height="80" />
+      <bpmndi:BPMNShape id="EndEvent_0il7r2z_di" bpmnElement="EndEvent_UpdateProcessVariables">
+        <dc:Bounds x="2573" y="535" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_10kkw6j_di" bpmnElement="Activity_0y1zoh5">
-        <dc:Bounds x="430" y="270" width="100" height="80" />
+      <bpmndi:BPMNShape id="ServiceTask_1aj56wc_di" bpmnElement="RegisterMember">
+        <dc:Bounds x="2121" y="422" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1y374tb_di" bpmnElement="Event_0fw1jxz">
-        <dc:Bounds x="372" y="192" width="36" height="36" />
+      <bpmndi:BPMNShape id="ServiceTask_0mbdjxr_di" bpmnElement="ReserveMsisdn">
+        <dc:Bounds x="1921" y="422" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_1s3tulq_di" bpmnElement="ApplyPromotions">
+        <dc:Bounds x="1731" y="422" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_174kv4y_di" bpmnElement="ErrorEndEvent_PendingContractSummaryCancelled">
+        <dc:Bounds x="925" y="635" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="960" y="629" width="85" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_131ll2d_di" bpmnElement="ErrorEndEvent_OrderLifetimeExceeded">
+        <dc:Bounds x="925" y="525" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="908" y="568" width="70" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1qisv11_di" bpmnElement="ErrorEndEvent_PendingContractSummaryCancelled_DefaultDocFlow">
+        <dc:Bounds x="925" y="361" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="908" y="320" width="84" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ti5sks_di" bpmnElement="Task_AwaitConfirmation_DefaultDocWorkflow">
+        <dc:Bounds x="811" y="422" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1bp43tu_di" bpmnElement="DefaultDocWorkflowPreAwaitConfirmation">
+        <dc:Bounds x="631" y="422" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_17n0n60_di" bpmnElement="ServiceTask_DefaultDocWorkflowPostAwaitConfirmation">
+        <dc:Bounds x="1021" y="422" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0e6i8h2_di" bpmnElement="Gateway_DocumentWorkflow" isMarkerVisible="true">
+        <dc:Bounds x="466" y="437" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1e2cxrm_di" bpmnElement="Gateway_1e2cxrm" isMarkerVisible="true">
+        <dc:Bounds x="1186" y="437" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_0wbtnhl_di" bpmnElement="StartEvent_initateActivation">
+        <dc:Bounds x="214" y="444" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="203" y="492" width="73" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_0yhyj9j_di" bpmnElement="ValidateOrderAndPrepareData">
+        <dc:Bounds x="306" y="422" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_12dsxr8_di" bpmnElement="save_member_for_riskident">
+        <dc:Bounds x="2624" y="210" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_0c3bn33_di" bpmnElement="SetConsents">
+        <dc:Bounds x="2624" y="115" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="InclusiveGateway_0df91ns_di" bpmnElement="ParallelGateway_0clqqzt">
+        <dc:Bounds x="4063" y="437" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1lzlj2b_di" bpmnElement="EndEvent_OrderConfirmed">
+        <dc:Bounds x="4163" y="443" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="4208" y="449" width="49" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_14tzqdi_di" bpmnElement="RetrieveMsisdnIfMissing">
+        <dc:Bounds x="3301" y="422" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1dls6mg_di" bpmnElement="BookAutoTopups">
+        <dc:Bounds x="3731" y="422" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CallActivity_1colbbj_di" bpmnElement="CallActivity_ArchiveContractDocuments">
+        <dc:Bounds x="3731" y="318" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0zpu697_di" bpmnElement="indexContractDocuments">
+        <dc:Bounds x="3591" y="318" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_0p0tajd_di" bpmnElement="ServiceTask_0p0tajd">
+        <dc:Bounds x="3591" y="530" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_0e2r82f_di" bpmnElement="ServiceTask_0e2r82f">
+        <dc:Bounds x="3731" y="530" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_1oozd0s_di" bpmnElement="ServiceTask_1oozd0s">
+        <dc:Bounds x="3871" y="530" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="InclusiveGateway_1yc803l_di" bpmnElement="ParallelGateway_0crudor">
+        <dc:Bounds x="3436" y="437" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0fnlhu1_di" bpmnElement="CallActivity_AwaitSimActivation">
+        <dc:Bounds x="3096" y="422" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0zdny8x_di" bpmnElement="Event_1g7y40f">
+        <dc:Bounds x="3183" y="525" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="IntermediateThrowEvent_04wawya_di" bpmnElement="IntermediateThrowEvent_0qb92hs">
+        <dc:Bounds x="2599" y="340" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="IntermediateThrowEvent_192ys7p_di" bpmnElement="IntermediateThrowEvent_1wdbfmd">
+        <dc:Bounds x="2716" y="340" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_0oklxq7_di" bpmnElement="Task_0chmr8b">
+        <dc:Bounds x="1672" y="530" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0eyt6vl_di" bpmnElement="BookSingleTopups">
+        <dc:Bounds x="3591" y="422" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0mk0d1m_di" bpmnElement="BookDeferredOptions">
+        <dc:Bounds x="3871" y="422" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_10zh0rd_di" bpmnElement="data_to_warehouse">
+        <dc:Bounds x="3393" y="820" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SubProcess_0za8t6u_di" bpmnElement="SubProcess_0lnms3q" isExpanded="true">
+        <dc:Bounds x="1848" y="637" width="486" height="176" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0n6exz3_di" bpmnElement="SequenceFlow_0n6exz3">
+        <di:waypoint x="2121" y="737" />
+        <di:waypoint x="2270" y="737" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_08ovz6d_di" bpmnElement="SequenceFlow_08ovz6d">
+        <di:waypoint x="1925" y="737" />
+        <di:waypoint x="2085" y="737" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_0149dfg_di" bpmnElement="EndEvent_0149dfg">
+        <dc:Bounds x="2270" y="719" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_14yuzk9_di" bpmnElement="IntermediateThrowEvent_1fpdp8v">
+        <dc:Bounds x="1889" y="719" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="IntermediateThrowEvent_00bbi8s_di" bpmnElement="IntermediateThrowEvent_01y7etd">
+        <dc:Bounds x="2085" y="719" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_02dddhv_di" bpmnElement="Association_02dddhv">
+        <di:waypoint x="1813" y="520" />
+        <di:waypoint x="1813" y="570" />
+        <di:waypoint x="1772" y="570" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BoundaryEvent_17ltq0g_di" bpmnElement="BoundaryEvent_12oe82t">
+        <dc:Bounds x="1795" y="484" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_00sm6oq_di" bpmnElement="Event_0yp2af5">
+        <dc:Bounds x="3103" y="484" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_119n4wk_di" bpmnElement="Event_confirmationLifetimeExceeded">
+        <dc:Bounds x="873" y="484" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0f8z2og_di" bpmnElement="BoundaryEvent_cleanUpPendingCS_DefaultDocFlow">
+        <dc:Bounds x="873" y="404" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BoundaryEvent_1epdckq_di" bpmnElement="BoundaryEvent_IdentSubProcessNotSucessfull">
+        <dc:Bounds x="2631" y="404" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BoundaryEvent_0c2n943_di" bpmnElement="BoundaryEvent_UpdateProcessVariables">
+        <dc:Bounds x="2631" y="484" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2551" y="580" width="79" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BoundaryEvent_19hkf2s_di" bpmnElement="BoundaryEvent_CanceledProcessInstance">
+        <dc:Bounds x="2680" y="404" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0gv2mvn_di" bpmnElement="BoundaryEvent_cleanUpPendingCS">
+        <dc:Bounds x="863" y="709" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BoundaryEvent_1xw4ucc_di" bpmnElement="BoundaryEvent_Documents_Created">
+        <dc:Bounds x="812" y="789" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BoundaryEvent_13rs7mv_di" bpmnElement="BoundaryEvent_Order_Lifetime">
+        <dc:Bounds x="871" y="789" width="36" height="36" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

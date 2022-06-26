@@ -127,7 +127,7 @@
 			<dependency>
 				<groupId>org.camunda.bpm</groupId>
 				<artifactId>camunda-bom</artifactId>
-				<version>${camunda-version}.${camunda-version-minor}${camunda-edition-suffix}</version>
+				<version>${camunda-version}.${camunda-version-minor}</version>
 				<scope>import</scope>
 				<type>pom</type>
 			</dependency>
@@ -163,7 +163,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.camunda.bpm.springboot</groupId>
-			<artifactId>camunda-bpm-spring-boot-starter-webapp${camunda-edition-suffix}</artifactId>
+			<artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
 			<exclusions>
 				<exclusion>
 					<groupId>org.springframework.boot</groupId>
@@ -246,19 +246,6 @@
 	</dependencies>
 
 	<profiles>
-		<profile>
-			<id>camunda-ee</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-				<property>
-					<name>camunda-edition</name>
-					<value>ee</value>
-				</property>
-			</activation>
-			<properties>
-				<camunda-edition-suffix>-ee</camunda-edition-suffix>
-			</properties>
-		</profile>
 		<profile>
 			<id>camunda-ce</id>
 			<activation>
